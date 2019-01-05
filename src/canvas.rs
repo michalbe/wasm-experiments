@@ -53,4 +53,14 @@ impl Canvas {
         );
 
     }
+
+    pub fn clear_all(&self) {
+        self.ctx.set_fill_style_color("white");
+        self.ctx.fill_rect(
+            0.0,
+            0.0,
+            f64::from(self.width * self.scaled_width),
+            f64::from(self.height * self.scaled_height)
+        );
+    }
 }
