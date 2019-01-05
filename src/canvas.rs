@@ -45,6 +45,12 @@ impl Canvas {
         let x = x * self.scaled_width;
         let y = y * self.scaled_height;
 
+        self.ctx.fill_rect(
+            f64::from(x),
+            f64::from(y),
+            f64::from(width),
+            f64::from(height)
+        );
 
     }
 }
