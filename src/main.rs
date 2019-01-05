@@ -5,5 +5,8 @@ mod canvcas;
 mod direction;
 
 fn main() {
-    println!("Hello, world!");
+    stdweb::initialize();
+
+
+    stdweb::event_loop();
 }
