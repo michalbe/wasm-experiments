@@ -48,8 +48,8 @@ impl Canvas {
         self.ctx.fill_rect(
             f64::from(x),
             f64::from(y),
-            f64::from(width),
-            f64::from(height)
+            f64::from(self.width),
+            f64::from(self.height)
         );
 
     }
