@@ -2,18 +2,38 @@
 extern crate stdweb;
 
 mod canvas;
-mod direction;
 
 use canvas::Canvas;
+
+use stdweb::traits::*;
+use stdweb::web::{event::KeyDownEvent, IEventTarget};
 
 fn main() {
     stdweb::initialize();
 
-    let canvas = Canvas::new("#canvas", 20, 20);
+    let mut x = 4;
+    let mut y = 5;
+    let width = 20;
+    let height = 20;
 
-    canvas.draw(5, 5, "red");
-    canvas.draw(10, 10, "orange");
-    canvas.draw(15, 10, "blue");
+    let canvas = Canvas::new("#canvas", width, height);
+
+    canvas.draw(x, y, "red");
+
+    stdweb::web::document().add_event_listener({
+        move |event: KeyDownEvent| {
+            match event.key().as_ref() {
+                "ArrowLeft" => { x = x - 1 },
+                "ArrowRight" => { x = x + 1 },
+                "ArrowDown" => { y = y + 1 },
+                "ArrowUp" => { y = y - 1 },
+                _ => {}
+            };
+
+            canvas.clear_all();
+            canvas.draw(x, y, "red");
+        }
+    });
 
     stdweb::event_loop();
 }
