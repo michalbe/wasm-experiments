@@ -37,13 +37,10 @@ impl Canvas {
     }
 
     pub fn draw(&self, x: u32, y: u32, color: &str) {
-        assert!(x < self.width);
-        assert!(y < self.height);
-
         self.ctx.set_fill_style_color(color);
 
-        let x = x * self.scaled_width;
-        let y = y * self.scaled_height;
+        let x = (x % self.width) * self.scaled_width;
+        let y = (y % self.height) * self.scaled_height;
 
         self.ctx.fill_rect(
             f64::from(x),
