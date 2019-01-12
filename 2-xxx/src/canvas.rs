@@ -21,6 +21,9 @@ impl Canvas {
 
         let ctx: CanvasRenderingContext2d = canvas.get_context().unwrap();
 
+        canvas.set_width(width);
+        canvas.set_height(height);
+
         Canvas {
             canvas,
             ctx,
@@ -29,14 +32,14 @@ impl Canvas {
         }
     }
 
-    pub fn draw(&self, x: u32, y: u32, color: &str) {
+    pub fn draw_rect(&self, x: u32, y: u32, width: u32, height: u32, color: &str) {
         self.ctx.set_fill_style_color(color);
 
         self.ctx.fill_rect(
             f64::from(x),
             f64::from(y),
-            1.0,
-            1.0
+            f64::from(width),
+            f64::from(height),
         );
 
     }

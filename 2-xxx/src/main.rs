@@ -14,31 +14,20 @@ use stdweb::web::{event::KeyDownEvent, IEventTarget};
 fn main() {
     stdweb::initialize();
 
+    let game_width = 500;
+    let game_height = 800;
+
     let mut x = 45;
     let mut y = 45;
+    let brick_width = 40;
+    let brick_height = 10;
 
-    let width = 200;
-    let height = 200;
 
-    let canvas = Canvas::new("#canvas", width, height);
+
+    let canvas = Canvas::new("#canvas", game_width, game_height);
 
     canvas.clear_all();
-    canvas.draw(x, y, "red");
-
-    stdweb::web::document().add_event_listener({
-        move |event: KeyDownEvent| {
-            match event.key().as_ref() {
-                "ArrowLeft" => { x = x - 1},
-                "ArrowRight" => { x = x + 1},
-                "ArrowDown" => { y = y + 1 },
-                "ArrowUp" => { y = y - 1 },
-                _ => {}
-            };
-
-            canvas.clear_all();
-            canvas.draw(x, y, "red");
-        }
-    });
+    canvas.draw_rect(x, y, brick_width, brick_height, "red");
 
     stdweb::event_loop();
 }
