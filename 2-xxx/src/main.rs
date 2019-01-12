@@ -17,8 +17,8 @@ fn main() {
     let mut x = 45;
     let mut y = 45;
 
-    let width = 20;
-    let height = 20;
+    let width = 200;
+    let height = 200;
 
     let canvas = Canvas::new("#canvas", width, height);
 

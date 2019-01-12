@@ -6,8 +6,6 @@ use stdweb::web::{document, CanvasRenderingContext2d};
 pub struct Canvas {
     pub canvas: CanvasElement,
     pub ctx: CanvasRenderingContext2d,
-    scaled_width: u32,
-    scaled_height: u32,
     width: u32,
     height: u32
 }
@@ -23,14 +21,9 @@ impl Canvas {
 
         let ctx: CanvasRenderingContext2d = canvas.get_context().unwrap();
 
-        let scaled_width = canvas.width() / width;
-        let scaled_height = canvas.height() / height;
-
         Canvas {
             canvas,
             ctx,
-            scaled_width,
-            scaled_height,
             width,
             height
         }
@@ -39,14 +32,11 @@ impl Canvas {
     pub fn draw(&self, x: u32, y: u32, color: &str) {
         self.ctx.set_fill_style_color(color);
 
-        let x = (x % self.width) * self.scaled_width;
-        let y = (y % self.height) * self.scaled_height;
-
         self.ctx.fill_rect(
             f64::from(x),
             f64::from(y),
-            f64::from(self.width),
-            f64::from(self.height)
+            1.0,
+            1.0
         );
 
     }
@@ -56,8 +46,8 @@ impl Canvas {
         self.ctx.fill_rect(
             0.0,
             0.0,
-            f64::from(self.width * self.scaled_width),
-            f64::from(self.height * self.scaled_height)
+            f64::from(self.width),
+            f64::from(self.height)
         );
     }
 }
